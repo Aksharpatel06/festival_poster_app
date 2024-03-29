@@ -13,8 +13,8 @@ class _splesh_screenState extends State<splesh_screen> {
   
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/home');
+    Timer(Duration(days: 5), () {
+      Navigator.pushNamed(context, '/home');
     });
     return Scaffold(
       body: Center(

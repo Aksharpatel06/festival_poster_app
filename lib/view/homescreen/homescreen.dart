@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
 import 'componet/List_View.dart';
-import 'componet/festival_Gridview.dart';
-import 'componet/festival_Listview.dart';
+
 import 'componet/grid_view.dart';
 
 class Home_screen extends StatefulWidget {
