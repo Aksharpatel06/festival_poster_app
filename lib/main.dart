@@ -1,4 +1,5 @@
 import 'package:festival_poster_app/view/homescreen/homescreen.dart';
+import 'package:festival_poster_app/view/posterscreen/posterscreen.dart';
 import 'package:festival_poster_app/view/spleshscreen/spleshscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: '/poster',
       routes: {
         '/':(context) => splesh_screen(),
         '/home':(context) => Home_screen(),
+        '/poster':(context) => Poster_screen(),
       },
     );
   }
