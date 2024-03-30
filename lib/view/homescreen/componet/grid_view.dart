@@ -11,5 +11,5 @@ GridView Grid_View() {
           festivalList[index]['Color'],
           festivalList[index]['Festival name'],
           festivalList[index]['Text'],
-          festivalList[index]['Images']));
+          festivalList[index]['Images'],index,context),);
 }

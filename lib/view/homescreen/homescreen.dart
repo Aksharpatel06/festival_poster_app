@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../utils/global_variable.dart';
 import 'componet/List_View.dart';
 
@@ -51,7 +50,7 @@ class _Home_screenState extends State<Home_screen> {
           ],
         ),
       ),
-      body: Center(child: (isfestival)?List_view():Grid_View()),
+      body: Center(child: (isfestival)?List_view(context):Grid_View()),
     );
   }
 }
