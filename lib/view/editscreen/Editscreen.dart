@@ -179,7 +179,6 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container backgroundcolors() {
     return Container(
               height: 220,
@@ -253,7 +252,6 @@ class _Edit_screenState extends State<Edit_screen> {
               ),
             );
   }
-
   Container background() {
     return Container(
               height: 220,
@@ -330,7 +328,6 @@ class _Edit_screenState extends State<Edit_screen> {
               ),
             );
   }
-
   Container text() {
     return Container(
       height: 220,
@@ -448,7 +445,6 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container canvas() {
     return Container(
       height: 220,

@@ -19,9 +19,9 @@ class _Home_screenState extends State<Home_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65.0),
+        preferredSize: const Size.fromHeight(65.0),
         child: AppBar(
-          shadowColor: Color(0xff1c2438),
+          shadowColor: const Color(0xff1c2438),
           centerTitle: true,
           title: Text(
             'Festy',
@@ -31,7 +31,7 @@ class _Home_screenState extends State<Home_screen> {
               letterSpacing: 2,
             ),
           ),
-          backgroundColor: Color(0xff1c2438),
+          backgroundColor: const Color(0xff1c2438),
           actions: [
             InkWell(
               onTap: () {
@@ -44,13 +44,13 @@ class _Home_screenState extends State<Home_screen> {
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             )
           ],
         ),
       ),
-      body: Center(child: (isfestival)?List_view(context):Grid_View()),
+      body: Center(child: (isfestival)?List_view():Grid_View()),
     );
   }
 }

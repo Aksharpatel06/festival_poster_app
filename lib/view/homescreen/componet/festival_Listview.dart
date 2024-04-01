@@ -16,12 +16,12 @@ Widget festival(Color color,String name,String name2,String img,int index,BuildC
         height: 100,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               width: 270,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15.0),
@@ -29,8 +29,8 @@ Widget festival(Color color,String name,String name2,String img,int index,BuildC
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white)),
-                    Text(name2,overflow: TextOverflow.clip,style: TextStyle(fontSize: 12,color: Colors.white),),
+                    Text(name,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white)),
+                    Text(name2,overflow: TextOverflow.clip,style: const TextStyle(fontSize: 12,color: Colors.white),),
                   ],
                 ),
               ),
@@ -45,7 +45,7 @@ Widget festival(Color color,String name,String name2,String img,int index,BuildC
                     color: Colors.black,
                     border: Border.all(color: Colors.white)
                 ),
-                child: ClipRRect(borderRadius: BorderRadius.all(Radius.circular(50)),
+                child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(50)),
                     child: Image.asset(img,fit: BoxFit.cover,)),
               ),
             )

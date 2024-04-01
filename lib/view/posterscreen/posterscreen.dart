@@ -16,61 +16,59 @@ class _Poster_screenState extends State<Poster_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color(0xff1c2438),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xff1c2438),
       ),
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                      height: 300,
-                      width: 300,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 0.5,
-                              spreadRadius: 1,
-                            )
-                          ],
-                        color: Colors.black,
-                      ),
-                      child: Image.asset(
-                        festivalList[postviewIndex]['Images'],
-                        fit: BoxFit.cover,
-                      )),
-                  SizedBox(height: 20,),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                      });
-                      Navigator.of(context).pushNamed('/edit');
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 300,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.teal,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text('Edit Template',style: TextStyle(color: Colors.white,fontSize: 20),),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    height: 300,
+                    width: 300,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 0.5,
+                            spreadRadius: 1,
+                          )
+                        ],
+                      color: Colors.black,
                     ),
-                  )
-                ],
-              ),
+                    child: Image.asset(
+                      festivalList[postviewIndex]['Images'],
+                      fit: BoxFit.cover,
+                    )),
+                const SizedBox(height: 20,),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                    });
+                    Navigator.of(context).pushNamed('/edit');
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 300,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text('Edit Template',style: TextStyle(color: Colors.white,fontSize: 20),),
+                  ),
+                )
+              ],
             ),
           ),
           Container(
             height: 220,
             alignment: Alignment.bottomRight,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color(0xfffcbd05),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.elliptical(200, 200),
@@ -78,14 +76,14 @@ class _Poster_screenState extends State<Poster_screen> {
             child: Container(
               height: 180,
               alignment: Alignment.center,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Color(0xff1d243b),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.elliptical(200, 200),
                       topRight: Radius.elliptical(200, 200))),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 35,
                   ),
                   Text(
@@ -96,7 +94,7 @@ class _Poster_screenState extends State<Poster_screen> {
                       letterSpacing: 2,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(

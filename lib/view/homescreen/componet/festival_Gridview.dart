@@ -12,11 +12,11 @@ Widget festival1(Color color, String name, String name2, String img,int index,Bu
       child: Container(
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
@@ -27,13 +27,13 @@ Widget festival1(Color color, String name, String name2, String img,int index,Bu
                   color: Colors.black,
                   border: Border.all(color: Colors.white)),
               child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  borderRadius: const BorderRadius.all(Radius.circular(50)),
                   child: Image.asset(
                     img,
                     fit: BoxFit.cover,
                   )),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
@@ -41,7 +41,7 @@ Widget festival1(Color color, String name, String name2, String img,int index,Bu
               child: Text(name,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.clip,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),

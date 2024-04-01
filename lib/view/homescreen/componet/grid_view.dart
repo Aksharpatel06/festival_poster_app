@@ -6,7 +6,7 @@ import '../../../utils/festivallist.dart';
 GridView Grid_View() {
   return GridView.builder(itemCount: festivalList.length,
       gridDelegate:
-      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) => festival1(
           festivalList[index]['Color'],
           festivalList[index]['Festival name'],
