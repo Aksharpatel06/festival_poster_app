@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
+import 'componect/index_stack.dart';
 
 class Edit_screen extends StatefulWidget {
   const Edit_screen({super.key});
@@ -55,19 +56,25 @@ class _Edit_screenState extends State<Edit_screen> {
           IndexedStack(
             index: editindex,
             children: [
+              Index_one(),
               Container(
-                height: 150,
-                color: Color(0xff1c2438),
+                height: 220,
+                decoration: BoxDecoration(
+                  color: Color(0xff1c2438),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
                 alignment: Alignment.center,
                 child: Column(
                   children: [
                     SizedBox(height: 15,),
-                    Text('Change Background Image And Color',style: TextStyle(color: Colors.white),),
+                    Text('Edit Your Text Here!!',style: TextStyle(color: Colors.white,fontSize: 15),),
                     SizedBox(height:25,),
                     Row(
                       mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
+                          width : 150,
+                          alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             boxShadow: [
@@ -80,9 +87,11 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('Background',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text('Add Text',style: TextStyle(color: Colors.white,fontSize: 20),),
                         ),
                         Container(
+                          width : 150,
+                          alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             boxShadow: [
@@ -95,16 +104,52 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('BG Color',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text('Alignment',style: TextStyle(color: Colors.white,fontSize: 20),),
                         ),
                       ],
-                    )
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width : 150,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              )
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Color(0xff1c2438),
+                          ),
+                          child: Text('Font Family',style: TextStyle(color: Colors.white,fontSize: 20),),
+                        ),
+                        Container(
+                          width : 150,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white,
+                                blurRadius: 5,
+                                spreadRadius: 2,
+                              )
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            color: Color(0xff1c2438),
+                          ),
+                          child: Text('Font Color',style: TextStyle(color: Colors.white,fontSize: 20),),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ),
-              Container(
-                height: 100,
-                color: Colors.orange,
               ),
               Container(
                 height: 100,
