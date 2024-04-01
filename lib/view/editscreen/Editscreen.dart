@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../utils/colorlist.dart';
 import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
-import 'componect/index_stack.dart';
+
 
 class Edit_screen extends StatefulWidget {
   const Edit_screen({super.key});
@@ -43,12 +45,14 @@ class _Edit_screenState extends State<Edit_screen> {
                             spreadRadius: 1,
                           )
                         ],
-                        color: Colors.black,
+                          gradient:(!isImageandColor)? LinearGradient(
+                              colors: colorgrid[backgroundcolorindex],
+                          ):null,
                       ),
-                      child: Image.asset(
-                        festivalList[postviewIndex]['Images'],
+                      child:(isImageandColor)? Image.asset(
+                        festivalList[postviewIndex]['image'][backgroungindex],
                         fit: BoxFit.cover,
-                      )),
+                      ):null),
                 ],
               ),
             ),
@@ -66,14 +70,21 @@ class _Edit_screenState extends State<Edit_screen> {
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    SizedBox(height: 15,),
-                    Text('Edit Your Text Here!!',style: TextStyle(color: Colors.white,fontSize: 15),),
-                    SizedBox(height:25,),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Edit Your Text Here!!',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
                     Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          width : 150,
+                          width: 150,
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -87,10 +98,13 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('Add Text',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text(
+                            'Add Text',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                         ),
                         Container(
-                          width : 150,
+                          width: 150,
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -104,16 +118,21 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('Alignment',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text(
+                            'Alignment',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          width : 150,
+                          width: 150,
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -127,10 +146,13 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('Font Family',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text(
+                            'Font Family',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                         ),
                         Container(
-                          width : 150,
+                          width: 150,
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -144,7 +166,10 @@ class _Edit_screenState extends State<Edit_screen> {
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                             color: Color(0xff1c2438),
                           ),
-                          child: Text('Font Color',style: TextStyle(color: Colors.white,fontSize: 20),),
+                          child: Text(
+                            'Font Color',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                         ),
                       ],
                     ),
@@ -158,6 +183,153 @@ class _Edit_screenState extends State<Edit_screen> {
               Container(
                 height: 100,
                 color: Colors.blue,
+              ),
+              Container(
+                height: 220,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Color(0xff1c2438),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Choose Background',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              setState(() {
+                                editindex = 0;
+                              });
+                            },
+                            child: Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                          festivalList[postviewIndex]['image'].length,
+                          (index) => InkWell(
+                            onTap: () {
+                              setState(() {
+                                isImageandColor = true;
+                                backgroungindex = index;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 18.0),
+                              child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 0.5,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                    color: Colors.black,
+                                  ),
+                                  child: Image.asset(
+                                    festivalList[postviewIndex]['image'][index],
+                                    fit: BoxFit.cover,
+                                  )),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: 220,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Color(0xff1c2438),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Choose Background Color',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              setState(() {
+                                editindex = 0;
+                              });
+                            },
+                            child: Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                          colorgrid.length,
+                          (index) => InkWell(
+                            onTap: () {
+                              setState(() {
+                                isImageandColor = false;
+                                backgroundcolorindex = index;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 18.0),
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 0.5,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                 gradient: LinearGradient(
+                                   colors: colorgrid[index]
+                                 )
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
@@ -259,6 +431,86 @@ class _Edit_screenState extends State<Edit_screen> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Container Index_one() {
+    return Container(
+      height: 220,
+      decoration: BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            'Change Background Image And Color',
+            style: TextStyle(color: Colors.white),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex = 4;
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      )
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Color(0xff1c2438),
+                  ),
+                  child: Text(
+                    'Background',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex = 5;
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      )
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Color(0xff1c2438),
+                  ),
+                  child: Text(
+                    'BG Color',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

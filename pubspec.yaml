@@ -66,6 +66,22 @@ flutter:
   assets:
     - asset/img/
     - asset/img/festival_img/
+    - asset/img/festival_img/diwali/
+    - asset/img/festival_img/Raksha Bandhan/
+    - asset/img/festival_img/pogal/
+    - asset/img/festival_img/maker sakranti/
+    - asset/img/festival_img/Basnt panchami/
+    - asset/img/festival_img/maha shivratri/
+    - asset/img/festival_img/navratri/
+    - asset/img/festival_img/holi/
+    - asset/img/festival_img/bhai dooj/
+    - asset/img/festival_img/ganesh/
+    - asset/img/festival_img/independence/
+    - asset/img/festival_img/republic/
+    - asset/img/festival_img/krishna janmashtami/
+    - asset/img/festival_img/dussehra/
+    - asset/img/festival_img/ram navami/
+    - asset/img/festival_img/karwa chauth/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
