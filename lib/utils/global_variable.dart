@@ -6,4 +6,6 @@ int editindex =0;
 int backgroungindex =0;
 int backgroundcolorindex =0;
 bool isImageandColor =true;
-Color color = Colors.blue;
+Color color = Colors.white;
+TextEditingController txtname = TextEditingController(text: 'happy birthday');
+double fontofsize =15;

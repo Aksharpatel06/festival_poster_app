@@ -49,6 +49,8 @@ class _Poster_screenState extends State<Poster_screen> {
                   onTap: () {
                     setState(() {
                       editindex = 6;
+                      backgroundcolorindex =0;
+                      isImageandColor =true;
                     });
                     Navigator.of(context).pushNamed('/edit');
                   },
@@ -88,7 +90,7 @@ class _Poster_screenState extends State<Poster_screen> {
                     height: 35,
                   ),
                   Text(
-                    'Festi Vals',
+                    'FestiVals',
                     style: GoogleFonts.lobster(
                       fontSize: 35,
                       color: Colors.white,

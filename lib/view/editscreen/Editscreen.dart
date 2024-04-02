@@ -1,3 +1,4 @@
+import 'package:festival_poster_app/utils/text.dart';
 import 'package:flutter/material.dart';
 import '../../utils/colorlist.dart';
 import '../../utils/festivallist.dart';
@@ -16,9 +17,9 @@ class _Edit_screenState extends State<Edit_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color(0xff1c2438),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xff1c2438),
+        title: const Text(
           'Edit',
           style: TextStyle(color: Colors.white),
         ),
@@ -26,41 +27,51 @@ class _Edit_screenState extends State<Edit_screen> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                      height: 300,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 0.5,
-                            spreadRadius: 1,
-                          )
-                        ],
-                        color:(!isImageandColor && backgroundcolorindex==0)
-                            ? color
-                            : null ,
-                        gradient: (!isImageandColor && backgroundcolorindex>0)
-                            ? LinearGradient(
-                                colors: colorgrid[backgroundcolorindex],
-                              )
-                            : null,
-                      ),
-                      child: (isImageandColor)
-                          ? Image.asset(
-                              festivalList[postviewIndex]['image']
-                                  [backgroungindex],
-                              fit: BoxFit.cover,
+            child: SingleChildScrollView(
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        height: 300,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            const BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 0.5,
+                              spreadRadius: 1,
                             )
-                          : null),
-                ],
+                          ],
+                          color: (!isImageandColor && backgroundcolorindex == 0)
+                              ? color
+                              : null,
+                          gradient: (!isImageandColor && backgroundcolorindex > 0)
+                              ? LinearGradient(
+                                  colors: colorgrid[backgroundcolorindex],
+                                )
+                              : null,
+                        ),
+                        child: Stack(
+                          children: [
+                            Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: (isImageandColor)
+                                    ? Image.asset(
+                                        festivalList[postviewIndex]['image']
+                                            [backgroungindex],
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null),
+                            Text(txtname.text,style: TextStyle(fontSize: fontofsize),)
+                          ],
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
@@ -80,106 +91,286 @@ class _Edit_screenState extends State<Edit_screen> {
               background(), //4
               backgroundcolors(), //5
               Container(), //6
+              Container(
+                height: 220,
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: Color(0xff1c2438),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Edit Your Font Style',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              setState(() {
+                                editindex = 1;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                      thickness: 2,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Alignament',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 38.0),
+                            child: Text(
+                              'Font size',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 8,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              alignmentindex = 0;
+                            });
+                          },
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5,
+                                )
+                              ],
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xff1c2438),
+                            ),
+                            child: Icon(
+                              Icons.align_horizontal_left,
+                              size: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              alignmentindex = 1;
+                            });
+                          },
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5,
+                                )
+                              ],
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xff1c2438),
+                            ),
+                            child: Icon(
+                              Icons.align_horizontal_center,
+                              size: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              alignmentindex = 2;
+                            });
+                          },
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5,
+                                )
+                              ],
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xff1c2438),
+                            ),
+                            child: Icon(
+                              Icons.align_horizontal_right,
+                              size: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 120,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              fontofsize++;
+                            });
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 30,
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5,
+                                )
+                              ],
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xff1c2438),
+                            ),
+                            child: Text(
+                              'A+',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              fontofsize--;
+                            });
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 30,
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5,
+                                )
+                              ],
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              color: Color(0xff1c2438),
+                            ),
+                            child: Text(
+                              'A-',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ), //7
+              Container(
+                height: 220,
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                  color: Color(0xff1c2438),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Edit Your Text',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              setState(() {
+                                editindex = 1;
+                              });
+                            },
+                            child: const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Divider(
+                      thickness: 2,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    TextField(style: TextStyle(color: Colors.white),
+                      controller: txtname,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        )
+                      ),
+                    )
+                  ],
+                ),
+              )//8
             ],
           ),
-          Container(
-            height: 70,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.white,
-                  blurRadius: 5,
-                  spreadRadius: 2,
-                )
-              ],
-              color: Color(0xff1c2438),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 0;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.draw,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Canvas',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 1;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.text_fields,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Text',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 2;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.share,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Share',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 3;
-                    });
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.save_alt,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          bottomnavigator(),
         ],
       ),
     );
@@ -188,37 +379,37 @@ class _Edit_screenState extends State<Edit_screen> {
   Container backgroundcolors() {
     return Container(
       height: 220,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Choose Background Color',
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
               InkWell(
                   onTap: () {
                     setState(() {
-                        editindex = 0;
+                      editindex = 0;
                     });
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.done,
                     color: Colors.white,
                   ))
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           SingleChildScrollView(
@@ -231,6 +422,35 @@ class _Edit_screenState extends State<Edit_screen> {
                     setState(() {
                       isImageandColor = false;
                       backgroundcolorindex = index;
+                      (index == 0)
+                          ? showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: const Text('Pick your color'),
+                                    content: Container(
+                                      height: 500,
+                                      width: 300,
+                                      child: ColorPicker(
+                                        color: color,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            color = value;
+                                            backgroundcolorindex = index;
+                                            isImageandColor = false;
+                                          });
+                                        },
+                                        initialPicker: Picker.paletteHue,
+                                      ),
+                                    ),
+                                    actions: [
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("save"))
+                                    ],
+                                  ))
+                          : null;
                     });
                   },
                   child: Padding(
@@ -238,47 +458,23 @@ class _Edit_screenState extends State<Edit_screen> {
                     child: Container(
                       height: 100,
                       width: 100,
-                      decoration: BoxDecoration(boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 0.5,
-                          spreadRadius: 1,
-                        )
-                      ], color: (index==0)?color:null,
-                          gradient:(index>0)? LinearGradient(colors: colorgrid[index]):null),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            const BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 0.5,
+                              spreadRadius: 1,
+                            )
+                          ],
+                          color: (index == 0) ? color : null,
+                          gradient: (index > 0)
+                              ? LinearGradient(colors: colorgrid[index])
+                              : null),
                       child: (index == 0)
-                          ? InkWell(
-                        onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text('Pick your color'),
-                                  content: Container(
-                                    height: 500,
-                                    width: 300,
-                                    child: ColorPicker(
-                                      color: color,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          color =value;
-                                          isImageandColor = false;
-                                        });
-                                      },
-                                      initialPicker: Picker.paletteHue,
-                                    ),
-                                  ),
-                                  actions: [
-                                    InkWell(onTap: () {
-                                      Navigator.of(context).pop();
-                                    },child: Text("save"))
-                                  ],
-                                ));
-                        },
-                            child: Icon(
-                                Icons.add,
-                                size: 50,
-                              ),
-                          )
+                          ? const Icon(
+                              Icons.add,
+                              size: 50,
+                            )
                           : null,
                     ),
                   ),
@@ -294,21 +490,21 @@ class _Edit_screenState extends State<Edit_screen> {
   Container background() {
     return Container(
       height: 220,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Choose Background',
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
@@ -318,13 +514,13 @@ class _Edit_screenState extends State<Edit_screen> {
                       editindex = 0;
                     });
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.done,
                     color: Colors.white,
                   ))
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           SingleChildScrollView(
@@ -344,7 +540,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     child: Container(
                         height: 100,
                         width: 100,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey,
@@ -371,79 +567,93 @@ class _Edit_screenState extends State<Edit_screen> {
   Container text() {
     return Container(
       height: 220,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Text(
+          const Text(
             'Edit Your Text Here!!',
             style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          SizedBox(
-            height: 25,
+          const SizedBox(
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: 150,
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  color: Color(0xff1c2438),
-                ),
-                child: Text(
-                  'Add Text',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex=8;
+                  });
+                },
+                child: Container(
+                  width: 130,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      )
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Color(0xff1c2438),
+                  ),
+                  child: const Text(
+                    'Add Text',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
                 ),
               ),
-              Container(
-                width: 150,
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  color: Color(0xff1c2438),
-                ),
-                child: Text(
-                  'Alignment',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex = 7;
+                  });
+                },
+                child: Container(
+                  width: 130,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      )
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Color(0xff1c2438),
+                  ),
+                  child: const Text(
+                    'Alignment',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                width: 150,
+                width: 130,
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                       color: Colors.white,
@@ -454,16 +664,16 @@ class _Edit_screenState extends State<Edit_screen> {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   color: Color(0xff1c2438),
                 ),
-                child: Text(
+                child: const Text(
                   'Font Family',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
               Container(
-                width: 150,
+                width: 130,
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                       color: Colors.white,
@@ -474,9 +684,9 @@ class _Edit_screenState extends State<Edit_screen> {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   color: Color(0xff1c2438),
                 ),
-                child: Text(
+                child: const Text(
                   'Font Color',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ],
@@ -489,21 +699,21 @@ class _Edit_screenState extends State<Edit_screen> {
   Container canvas() {
     return Container(
       height: 220,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             'Change Background Image And Color',
             style: TextStyle(color: Colors.white),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Row(
@@ -516,8 +726,8 @@ class _Edit_screenState extends State<Edit_screen> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.white,
@@ -528,7 +738,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Color(0xff1c2438),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Background',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
@@ -541,8 +751,8 @@ class _Edit_screenState extends State<Edit_screen> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.white,
@@ -553,7 +763,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Color(0xff1c2438),
                   ),
-                  child: Text(
+                  child: const Text(
                     'BG Color',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
@@ -561,6 +771,107 @@ class _Edit_screenState extends State<Edit_screen> {
               ),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  Container bottomnavigator() {
+    return Container(
+      height: 70,
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white,
+            blurRadius: 5,
+            spreadRadius: 2,
+          )
+        ],
+        color: Color(0xff1c2438),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                editindex = 0;
+              });
+            },
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.draw,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Canvas',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                editindex = 1;
+              });
+            },
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.text_fields,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Text',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                editindex = 2;
+              });
+            },
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.share,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Share',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                editindex = 3;
+              });
+            },
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.save_alt,
+                  color: Colors.white,
+                ),
+                Text(
+                  'Save',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
