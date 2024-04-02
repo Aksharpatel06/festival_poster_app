@@ -48,6 +48,7 @@ class _Poster_screenState extends State<Poster_screen> {
                 InkWell(
                   onTap: () {
                     setState(() {
+                      editindex = 6;
                     });
                     Navigator.of(context).pushNamed('/edit');
                   },

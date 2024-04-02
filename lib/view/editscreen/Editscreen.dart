@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../utils/colorlist.dart';
 import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
+import "package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart";
 
 class Edit_screen extends StatefulWidget {
   const Edit_screen({super.key});
@@ -43,7 +44,10 @@ class _Edit_screenState extends State<Edit_screen> {
                             spreadRadius: 1,
                           )
                         ],
-                        gradient: (!isImageandColor)
+                        color:(!isImageandColor && backgroundcolorindex==0)
+                            ? color
+                            : null ,
+                        gradient: (!isImageandColor && backgroundcolorindex>0)
                             ? LinearGradient(
                                 colors: colorgrid[backgroundcolorindex],
                               )
@@ -63,18 +67,19 @@ class _Edit_screenState extends State<Edit_screen> {
           IndexedStack(
             index: editindex,
             children: [
-              canvas(),
-              text(),
+              canvas(), //0
+              text(), //1
               Container(
                 height: 100,
                 color: Colors.green,
-              ),
+              ), //2
               Container(
                 height: 100,
                 color: Colors.blue,
-              ),
-              background(),
-              backgroundcolors(),
+              ), //3
+              background(), //4
+              backgroundcolors(), //5
+              Container(), //6
             ],
           ),
           Container(
@@ -179,155 +184,190 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
+
   Container backgroundcolors() {
     return Container(
-              height: 220,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Color(0xff1c2438),
-                borderRadius: BorderRadius.all(Radius.circular(5)),
+      height: 220,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Choose Background Color',
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Choose Background Color',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      InkWell(
-                          onTap: () {
-                            setState(() {
-                              editindex = 0;
-                            });
-                          },
-                          child: Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                        colorgrid.length,
-                        (index) => InkWell(
-                          onTap: () {
-                            setState(() {
-                              isImageandColor = false;
-                              backgroundcolorindex = index;
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 18.0),
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 0.5,
-                                      spreadRadius: 1,
-                                    )
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                        editindex = 0;
+                    });
+                  },
+                  child: Icon(
+                    Icons.done,
+                    color: Colors.white,
+                  ))
+            ],
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                colorgrid.length,
+                (index) => InkWell(
+                  onTap: () {
+                    setState(() {
+                      isImageandColor = false;
+                      backgroundcolorindex = index;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 18.0),
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 0.5,
+                          spreadRadius: 1,
+                        )
+                      ], color: (index==0)?color:null,
+                          gradient:(index>0)? LinearGradient(colors: colorgrid[index]):null),
+                      child: (index == 0)
+                          ? InkWell(
+                        onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text('Pick your color'),
+                                  content: Container(
+                                    height: 500,
+                                    width: 300,
+                                    child: ColorPicker(
+                                      color: color,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          color =value;
+                                          isImageandColor = false;
+                                        });
+                                      },
+                                      initialPicker: Picker.paletteHue,
+                                    ),
+                                  ),
+                                  actions: [
+                                    InkWell(onTap: () {
+                                      Navigator.of(context).pop();
+                                    },child: Text("save"))
                                   ],
-                                  gradient: LinearGradient(
-                                      colors: colorgrid[index])),
-                            ),
-                          ),
-                        ),
-                      ),
+                                ));
+                        },
+                            child: Icon(
+                                Icons.add,
+                                size: 50,
+                              ),
+                          )
+                          : null,
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
-            );
+            ),
+          )
+        ],
+      ),
+    );
   }
+
   Container background() {
     return Container(
-              height: 220,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Color(0xff1c2438),
-                borderRadius: BorderRadius.all(Radius.circular(5)),
+      height: 220,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Choose Background',
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Choose Background',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      InkWell(
-                          onTap: () {
-                            setState(() {
-                              editindex = 0;
-                            });
-                          },
-                          child: Icon(
-                            Icons.done,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                        festivalList[postviewIndex]['image'].length,
-                        (index) => InkWell(
-                          onTap: () {
-                            setState(() {
-                              isImageandColor = true;
-                              backgroungindex = index;
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 18.0),
-                            child: Container(
-                                height: 100,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 0.5,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                  color: Colors.black,
-                                ),
-                                child: Image.asset(
-                                  festivalList[postviewIndex]['image'][index],
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      editindex = 0;
+                    });
+                  },
+                  child: Icon(
+                    Icons.done,
+                    color: Colors.white,
+                  ))
+            ],
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                festivalList[postviewIndex]['image'].length,
+                (index) => InkWell(
+                  onTap: () {
+                    setState(() {
+                      isImageandColor = true;
+                      backgroungindex = index;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 18.0),
+                    child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 0.5,
+                              spreadRadius: 1,
+                            )
+                          ],
+                          color: Colors.black,
                         ),
-                      ),
-                    ),
-                  )
-                ],
+                        child: Image.asset(
+                          festivalList[postviewIndex]['image'][index],
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                ),
               ),
-            );
+            ),
+          )
+        ],
+      ),
+    );
   }
+
   Container text() {
     return Container(
       height: 220,
@@ -445,6 +485,7 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
+
   Container canvas() {
     return Container(
       height: 220,
