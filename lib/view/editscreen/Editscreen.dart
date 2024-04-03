@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:festival_poster_app/utils/text.dart';
 import 'package:flutter/material.dart';
@@ -267,53 +268,53 @@ class _Edit_screenState extends State<Edit_screen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-
-        unselectedLabelStyle: TextStyle(color: Colors.white),
-        items: [
-          BottomNavigationBarItem(
-              icon: InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 0;
-                    });
-                  },
-                  child: Icon(Icons.draw)),
-              label: 'Canvas',backgroundColor: Color(0xff1c2438),),
-          BottomNavigationBarItem(
-              icon: InkWell(
-                  onTap: () {
-                    setState(() {
-                      editindex = 1;
-                    });
-                  },
-                  child: Icon(Icons.text_fields)),
-              label: 'Text'),
-          BottomNavigationBarItem(
-              icon: InkWell(
-                  onTap: () async{
-
-                      RenderRepaintBoundary? boundray = imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-                      ui.Image image = await boundray.toImage();
-                      ByteData? bytedata = await image.toByteData(format: ui.ImageByteFormat.png);
-                      imgdata = bytedata!.buffer.asUint8List();
-                      ImageGallerySaver.saveImage(imgdata!,name: 'poster',quality: 100);
-                  },
-                  child: Icon(Icons.share)),
-              label: 'Share'),
-          BottomNavigationBarItem(
-              icon: InkWell(
-                  onTap: () async{
-                    final directory =await getApplicationDocumentsDirectory();
-                    File fileImage = await File('${directory.path}/img.png').create();
-                    fileImage.writeAsBytesSync(imgdata!);
-                    await ShareExtend.share(fileImage.path, 'festival');
-                  },
-                  child: Icon(Icons.save_alt)),
-              label: 'Save'),
-        ],
-      ),
+      bottomNavigationBar:bottomnavigator(),
+      // BottomNavigationBar(
+      //   showUnselectedLabels: true,
+      //   unselectedLabelStyle: TextStyle(color: Colors.white),
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: InkWell(
+      //           onTap: () {
+      //             setState(() {
+      //               editindex = 0;
+      //             });
+      //           },
+      //           child: Icon(Icons.draw)),
+      //       label: 'Canvas',backgroundColor: Color(0xff1c2438),),
+      //     BottomNavigationBarItem(
+      //         icon: InkWell(
+      //             onTap: () {
+      //               setState(() {
+      //                 editindex = 1;
+      //               });
+      //             },
+      //             child: Icon(Icons.text_fields)),
+      //         label: 'Text'),
+      //     BottomNavigationBarItem(
+      //         icon: InkWell(
+      //             onTap: () async{
+      //
+      //               RenderRepaintBoundary? boundray = imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      //               ui.Image image = await boundray.toImage();
+      //               ByteData? bytedata = await image.toByteData(format: ui.ImageByteFormat.png);
+      //               imgdata = bytedata!.buffer.asUint8List();
+      //               ImageGallerySaver.saveImage(imgdata!,name: 'poster',quality: 100);
+      //             },
+      //             child: Icon(Icons.share)),
+      //         label: 'Share'),
+      //     BottomNavigationBarItem(
+      //         icon: InkWell(
+      //             onTap: () async{
+      //               final directory =await getApplicationDocumentsDirectory();
+      //               File fileImage = await File('${directory.path}/img.png').create();
+      //               fileImage.writeAsBytesSync(imgdata!);
+      //               await ShareExtend.share(fileImage.path, 'festival');
+      //             },
+      //             child: Icon(Icons.save_alt)),
+      //         label: 'Save'),
+      //   ],
+      // ),
     );
   }
 
@@ -1067,10 +1068,12 @@ class _Edit_screenState extends State<Edit_screen> {
             ),
           ),
           InkWell(
-            onTap: () {
-              setState(() {
-                editindex = 2;
-              });
+            onTap: ()  async {
+                RenderRepaintBoundary? boundray = imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+                              ui.Image image = await boundray.toImage();
+                              ByteData? bytedata = await image.toByteData(format: ui.ImageByteFormat.png);
+                              imgdata = bytedata!.buffer.asUint8List();
+                              ImageGallerySaver.saveImage(imgdata!,name: 'poster',quality: 100);
             },
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1087,6 +1090,12 @@ class _Edit_screenState extends State<Edit_screen> {
             ),
           ),
           InkWell(
+            onTap: () async {
+              final directory =await getApplicationDocumentsDirectory();
+                            File fileImage = await File('${directory.path}/img.png').create();
+                            fileImage.writeAsBytesSync(imgdata!);
+                            await ShareExtend.share(fileImage.path, 'festival');
+            },
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
