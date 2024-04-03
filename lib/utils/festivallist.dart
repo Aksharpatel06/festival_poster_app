@@ -18,7 +18,7 @@ List festivalList=[
     'Festival name' : 'Raksha Bandhan',
     'Text': 'Create your Raksha Bandhan Templates',
     'Images' : 'asset/img/festival_img/raksha_bandhan.jpg',
-    'Color' : Colors.yellow,
+    'Color' : Colors.amber,
     'image':[
       'asset/img/festival_img/Raksha Bandhan/raksha_bandhan.jpg',
       'asset/img/festival_img/Raksha Bandhan/img1.jpg',
@@ -74,7 +74,7 @@ List festivalList=[
     'Festival name' : 'Maha Shivratri',
     'Text': 'Create your Maha Shivratri Templates',
     'Images' : 'asset/img/festival_img/maha_shivratri.jpg',
-    'Color' : Colors.brown,
+    'Color' : Colors.blueGrey,
     'image':[
       'asset/img/festival_img/maha shivratri/maha_shivratri.jpg',
       'asset/img/festival_img/maha shivratri/img1.jpg',
@@ -201,7 +201,7 @@ List festivalList=[
     'Festival name' : 'Ram Navami',
     'Text': 'Create your Ram Navami Templates',
     'Images' : 'asset/img/festival_img/Ram_Navami.jpg',
-    'Color' : Colors.lightGreenAccent,
+    'Color' : Colors.lightGreen,
     'image':[
       'asset/img/festival_img/ram navami/Ram_Navami.jpg',
       'asset/img/festival_img/ram navami/img1.jpg',

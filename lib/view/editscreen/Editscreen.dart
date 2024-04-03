@@ -1,5 +1,6 @@
 import 'package:festival_poster_app/utils/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../utils/colorlist.dart';
 import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
@@ -67,7 +68,12 @@ class _Edit_screenState extends State<Edit_screen> {
                                         fit: BoxFit.cover,
                                       )
                                     : null),
-                            Text(txtname.text,style: TextStyle(fontSize: fontofsize),)
+                            Positioned(top:top,
+                                bottom: bottem,
+                                left: left,
+                                right: right,
+                                child: Container(height: 300,
+                                    width: 300,child: Text(txtname.text,style: TextStyle(fontSize: fontofsize),)))
                           ],
                         ))
                   ],
@@ -91,232 +97,7 @@ class _Edit_screenState extends State<Edit_screen> {
               background(), //4
               backgroundcolors(), //5
               Container(), //6
-              Container(
-                height: 220,
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Color(0xff1c2438),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Edit Your Font Style',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                editindex = 1;
-                              });
-                            },
-                            child: const Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      thickness: 2,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Alignament',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 38.0),
-                            child: Text(
-                              'Font size',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 8,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              alignmentindex = 0;
-                            });
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Icon(
-                              Icons.align_horizontal_left,
-                              size: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              alignmentindex = 1;
-                            });
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Icon(
-                              Icons.align_horizontal_center,
-                              size: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              alignmentindex = 2;
-                            });
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Icon(
-                              Icons.align_horizontal_right,
-                              size: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              fontofsize++;
-                            });
-                          },
-                          child: Container(
-                            width: 40,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Text(
-                              'A+',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              fontofsize--;
-                            });
-                          },
-                          child: Container(
-                            width: 40,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Text(
-                              'A-',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ), //7
+              alignment(), //7
               Container(
                 height: 220,
                 padding: const EdgeInsets.all(10),
@@ -374,6 +155,282 @@ class _Edit_screenState extends State<Edit_screen> {
         ],
       ),
     );
+  }
+
+  Container alignment() {
+    return Container(
+              height: 220,
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                color: Color(0xff1c2438),
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Edit Your Font Style',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              editindex = 1;
+                            });
+                          },
+                          child: const Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Divider(
+                    thickness: 2,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Alignament',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(height: 5,),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  bottem+=4;
+                                  top-=4;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 14.0),
+                                child: Container(
+                                  width: 30,
+                                  height: 30,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black,
+                                        blurRadius: 1,
+                                        spreadRadius: 0.5,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    color: Color(0xff1c2438),
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_drop_up,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 12,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      right+=4;
+                                      left-=4;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 1,
+                                          spreadRadius: 0.5,
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      color: Color(0xff1c2438),
+                                    ),
+                                    child: Icon(
+                                      Icons.arrow_left_sharp,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 38,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      right-=4;
+                                      left+=4;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 1,
+                                          spreadRadius: 0.5,
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      color: Color(0xff1c2438),
+                                    ),
+                                    child: Icon(
+                                      Icons.arrow_right,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  top+=4;
+                                  bottem-=4;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 14.0),
+                                child: Container(
+                                  width: 30,
+                                  height: 30,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black,
+                                        blurRadius: 1,
+                                        spreadRadius: 0.5,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                    color: Color(0xff1c2438),
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 38.0),
+                              child: Text(
+                                'Font size',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      fontofsize++;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 30,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 1,
+                                          spreadRadius: 0.5,
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      color: Color(0xff1c2438),
+                                    ),
+                                    child: Text(
+                                      'A+',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 12,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      fontofsize--;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 40,
+                                    height: 30,
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 1,
+                                          spreadRadius: 0.5,
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      color: Color(0xff1c2438),
+                                    ),
+                                    child: Text(
+                                      'A-',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
   }
 
   Container backgroundcolors() {
