@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-
 Icon icons() {
   return Icon(
     Icons.done,
     color: Colors.white,
+  );
+}
+SizedBox sizedBox2() {
+  return SizedBox(
+    height: 15,
   );
 }
 Column dividerandspace() {

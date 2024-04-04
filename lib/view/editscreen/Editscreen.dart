@@ -37,7 +37,7 @@ class _Edit_screenState extends State<Edit_screen> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xff1c2438),
-        title: const Text(
+        title: Text(
           'Edit',
           style: TextStyle(color: Colors.white),
         ),
@@ -55,30 +55,29 @@ class _Edit_screenState extends State<Edit_screen> {
               ),
             ),
           ),
-          IndexedStack(
-            index: editindex,
-            children: [
-              canvas(), //0
-              text(), //1
-              fontfamilys(), //2
-              Container(
-                height: 100,
-                color: Colors.blue,
-              ), //3
-              background(), //4
-              backgroundcolors(), //5
-              Container(), //6
-              alignment(), //7
-              textfield(), //8
-              textcolor() //9
-            ],
-          ),
+          buildIndexedStack(),
         ],
       ),
       bottomNavigationBar: bottomnavigator(),
     );
   }
-
+  IndexedStack buildIndexedStack() {
+    return IndexedStack(
+          index: editindex,
+          children: [
+            canvas(), //0
+            text(), //1
+            fontfamilys(), //2
+            Container(), //3
+            background(), //4
+            backgroundcolors(), //5
+            Container(), //6
+            alignment(), //7
+            textfield(), //8
+            textcolor() //9
+          ],
+        );
+  }
   Container textfield() {
     return Container(
       height: 230,
@@ -122,9 +121,7 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -172,9 +169,7 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -246,9 +241,7 @@ class _Edit_screenState extends State<Edit_screen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -380,9 +373,7 @@ class _Edit_screenState extends State<Edit_screen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -460,13 +451,11 @@ class _Edit_screenState extends State<Edit_screen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               headofimage(),
+              headofimage(),
               InkWell(
                   onTap: () {
                     setState(() {
@@ -510,9 +499,7 @@ class _Edit_screenState extends State<Edit_screen> {
       alignment: Alignment.center,
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          sizedBox2(),
           headoftext(),
           const SizedBox(
             height: 20,
