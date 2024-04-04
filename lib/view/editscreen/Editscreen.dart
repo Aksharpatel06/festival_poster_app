@@ -1,19 +1,27 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:festival_poster_app/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_extend/share_extend.dart';
 import '../../utils/colorlist.dart';
 import '../../utils/festivallist.dart';
 import '../../utils/global_variable.dart';
 import "package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart";
-import 'dart:ui' as ui;
+import 'componect/background/backcolor.dart';
+import 'componect/background/backgroundimage.dart';
+import 'componect/bottomnavigator.dart';
+import 'componect/image.dart';
+import 'componect/simple.dart';
+import 'componect/text/addthetext/addtext.dart';
+import 'componect/text/alignment/bottom.dart';
+import 'componect/text/alignment/fontsize.dart';
+import 'componect/text/alignment/left.dart';
+import 'componect/text/alignment/rigth.dart';
+import 'componect/text/alignment/simple.dart';
+import 'componect/text/alignment/top.dart';
+import 'componect/text/buttons.dart';
+import 'componect/text/fontcolor/color.dart';
+import 'componect/text/fontfamily/family.dart';
 
 class Edit_screen extends StatefulWidget {
   const Edit_screen({super.key});
@@ -21,7 +29,7 @@ class Edit_screen extends StatefulWidget {
   @override
   State<Edit_screen> createState() => _Edit_screenState();
 }
-GlobalKey imgkey = GlobalKey();
+
 class _Edit_screenState extends State<Edit_screen> {
   @override
   Widget build(BuildContext context) {
@@ -42,62 +50,7 @@ class _Edit_screenState extends State<Edit_screen> {
                 alignment: Alignment.center,
                 child: RepaintBoundary(
                   key: imgkey,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                          height: 300,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              const BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 0.5,
-                                spreadRadius: 1,
-                              )
-                            ],
-                            color: (!isImageandColor && backgroundcolorindex == 0)
-                                ? color
-                                : null,
-                            gradient:
-                                (!isImageandColor && backgroundcolorindex > 0)
-                                    ? LinearGradient(
-                                        colors: colorgrid[backgroundcolorindex],
-                                      )
-                                    : null,
-                          ),
-                          child: Stack(
-                            children: [
-                              Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: (isImageandColor)
-                                      ? Image.asset(
-                                          festivalList[postviewIndex]['image']
-                                              [backgroungindex],
-                                          fit: BoxFit.cover,
-                                        )
-                                      : null),
-                              Positioned(
-                                  top: top,
-                                  bottom: bottem,
-                                  left: left,
-                                  right: right,
-                                  child: Container(
-                                      height: 300,
-                                      width: 300,
-                                      child: Text(
-                                        txtname.text,
-                                        style: TextStyle(
-                                            fontSize: fontofsize,
-                                            color: Colorlist[textcolorindex]),
-                                      )))
-                            ],
-                          ))
-                    ],
-                  ),
+                  child: image(),
                 ),
               ),
             ),
@@ -107,10 +60,7 @@ class _Edit_screenState extends State<Edit_screen> {
             children: [
               canvas(), //0
               text(), //1
-              Container(
-                height: 100,
-                color: Colors.green,
-              ), //2
+              fontfamilys(), //2
               Container(
                 height: 100,
                 color: Colors.blue,
@@ -119,208 +69,175 @@ class _Edit_screenState extends State<Edit_screen> {
               backgroundcolors(), //5
               Container(), //6
               alignment(), //7
-              Container(
-                height: 220,
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Color(0xff1c2438),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Edit Your Text',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                TextEditingControllerlist.add(txtname.text);
-                                editindex = 1;
-                              });
-                            },
-                            child: const Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      thickness: 2,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    TextField(
-                      style: TextStyle(color: Colors.white),
-                      controller: txtname,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      )),
-                    )
-                  ],
-                ),
-              ), //8
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Color(0xff1c2438),
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Edit Your Text color',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                        InkWell(
-                            onTap: () {
-                              setState(() {
-                                editindex = 1;
-                              });
-                            },
-                            child: const Icon(
-                              Icons.done,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Divider(
-                      thickness: 2,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    GridView.builder(
-                      itemCount: Colorlist.length,
-                      physics: PageScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5),
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          setState(() {
-                            textcolorindex = index;
-                            (index == 0)
-                                ? showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: const Text('Pick your color'),
-                                  content: Container(
-                                    height: 500,
-                                    width: 300,
-                                    child: ColorPicker(
-                                      color: color,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          color = value;
-                                          backgroundcolorindex = index;
-                                          isImageandColor = false;
-                                        });
-                                      },
-                                      initialPicker: Picker.paletteHue,
-                                    ),
-                                  ),
-                                  actions: [
-                                    InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text("save"))
-                                  ],
-                                ))
-                                : null;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colorlist[index]),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ) //9
+              textfield(), //8
+              textcolor() //9
             ],
           ),
         ],
       ),
-      bottomNavigationBar:bottomnavigator(),
-      // BottomNavigationBar(
-      //   showUnselectedLabels: true,
-      //   unselectedLabelStyle: TextStyle(color: Colors.white),
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: InkWell(
-      //           onTap: () {
-      //             setState(() {
-      //               editindex = 0;
-      //             });
-      //           },
-      //           child: Icon(Icons.draw)),
-      //       label: 'Canvas',backgroundColor: Color(0xff1c2438),),
-      //     BottomNavigationBarItem(
-      //         icon: InkWell(
-      //             onTap: () {
-      //               setState(() {
-      //                 editindex = 1;
-      //               });
-      //             },
-      //             child: Icon(Icons.text_fields)),
-      //         label: 'Text'),
-      //     BottomNavigationBarItem(
-      //         icon: InkWell(
-      //             onTap: () async{
-      //
-      //               RenderRepaintBoundary? boundray = imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      //               ui.Image image = await boundray.toImage();
-      //               ByteData? bytedata = await image.toByteData(format: ui.ImageByteFormat.png);
-      //               imgdata = bytedata!.buffer.asUint8List();
-      //               ImageGallerySaver.saveImage(imgdata!,name: 'poster',quality: 100);
-      //             },
-      //             child: Icon(Icons.share)),
-      //         label: 'Share'),
-      //     BottomNavigationBarItem(
-      //         icon: InkWell(
-      //             onTap: () async{
-      //               final directory =await getApplicationDocumentsDirectory();
-      //               File fileImage = await File('${directory.path}/img.png').create();
-      //               fileImage.writeAsBytesSync(imgdata!);
-      //               await ShareExtend.share(fileImage.path, 'festival');
-      //             },
-      //             child: Icon(Icons.save_alt)),
-      //         label: 'Save'),
-      //   ],
-      // ),
+      bottomNavigationBar: bottomnavigator(),
     );
   }
 
+  Container textfield() {
+    return Container(
+      height: 230,
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              headtext(),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      TextEditingControllerlist.add(txtname.text);
+                      editindex = 1;
+                    });
+                  },
+                  child: icons())
+            ],
+          ),
+          dividerandspace(),
+          textFields()
+        ],
+      ),
+    );
+  }
+  Container fontfamilys() {
+    return Container(
+      height: 230,
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              familyheadtext(),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      editindex = 1;
+                    });
+                  },
+                  child: icons())
+            ],
+          ),
+          dividerandspace(),
+          Container(
+            height: 144,
+            child: SingleChildScrollView(
+              child: Column(
+                  children: List.generate(
+                      textfamily.length,
+                      (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  textfontfamilyindex = index;
+                                });
+                              },
+                              child: fontfamilytext(index),
+                            ),
+                          ))),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  Container textcolor() {
+    return Container(
+      height: 230,
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Color(0xff1c2438),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              headfontcolor(),
+              InkWell(
+                  onTap: () {
+                    setState(() {
+                      editindex = 1;
+                    });
+                  },
+                  child: icons())
+            ],
+          ),
+          dividerandspace(),
+          GridView.builder(
+            itemCount: Colorlist.length,
+            physics: PageScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                setState(() {
+                  textcolorindex = index;
+                  (index == 0)
+                      ? showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: const Text('Pick your color'),
+                                content: Container(
+                                  height: 500,
+                                  width: 300,
+                                  child: ColorPicker(
+                                    color: Colorlist[0],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        Colorlist[0] = value;
+                                      });
+                                    },
+                                    initialPicker: Picker.paletteHue,
+                                  ),
+                                ),
+                                actions: [
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("save"))
+                                ],
+                              ))
+                      : null;
+                });
+              },
+              child: coloricon(index),
+            ),
+          )
+        ],
+      ),
+    );
+  }
   Container alignment() {
     return Container(
-      height: 220,
+      height: 230,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         color: Color(0xff1c2438),
@@ -335,31 +252,17 @@ class _Edit_screenState extends State<Edit_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Edit Your Font Style',
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
+              headofalignments(),
               InkWell(
                   onTap: () {
                     setState(() {
                       editindex = 1;
                     });
                   },
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
-                  ))
+                  child: icons())
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Divider(
-            thickness: 2,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
+          dividerandspace(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
@@ -368,10 +271,7 @@ class _Edit_screenState extends State<Edit_screen> {
               children: [
                 Column(
                   children: [
-                    Text(
-                      'Alignament',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    headofpostion(),
                     SizedBox(
                       height: 5,
                     ),
@@ -382,30 +282,7 @@ class _Edit_screenState extends State<Edit_screen> {
                           top -= 4;
                         });
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 14.0),
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 1,
-                                spreadRadius: 0.5,
-                              )
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            color: Color(0xff1c2438),
-                          ),
-                          child: Icon(
-                            Icons.arrow_drop_up,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                      child: alignmenttop(),
                     ),
                     SizedBox(
                       height: 5,
@@ -423,28 +300,7 @@ class _Edit_screenState extends State<Edit_screen> {
                               left -= 4;
                             });
                           },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Icon(
-                              Icons.arrow_left_sharp,
-                              size: 25,
-                              color: Colors.white,
-                            ),
-                          ),
+                          child: alignmentleft(),
                         ),
                         SizedBox(
                           width: 38,
@@ -456,28 +312,7 @@ class _Edit_screenState extends State<Edit_screen> {
                               left += 4;
                             });
                           },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Icon(
-                              Icons.arrow_right,
-                              size: 25,
-                              color: Colors.white,
-                            ),
-                          ),
+                          child: alignmentrigth(),
                         ),
                       ],
                     ),
@@ -491,43 +326,14 @@ class _Edit_screenState extends State<Edit_screen> {
                           bottem -= 4;
                         });
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 14.0),
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 1,
-                                spreadRadius: 0.5,
-                              )
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            color: Color(0xff1c2438),
-                          ),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                      child: alignmentbottom(),
                     ),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 38.0),
-                      child: Text(
-                        'Font size',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    fontsizetext(),
                     SizedBox(
                       height: 10,
                     ),
@@ -539,27 +345,7 @@ class _Edit_screenState extends State<Edit_screen> {
                               fontofsize++;
                             });
                           },
-                          child: Container(
-                            width: 40,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Text(
-                              'A+',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
+                          child: fontsizeincrease(),
                         ),
                         SizedBox(
                           width: 12,
@@ -570,27 +356,7 @@ class _Edit_screenState extends State<Edit_screen> {
                               fontofsize--;
                             });
                           },
-                          child: Container(
-                            width: 40,
-                            height: 30,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 1,
-                                  spreadRadius: 0.5,
-                                )
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              color: Color(0xff1c2438),
-                            ),
-                            child: Text(
-                              'A-',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
+                          child: fontsizereduce(),
                         ),
                       ],
                     )
@@ -603,10 +369,9 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container backgroundcolors() {
     return Container(
-      height: 220,
+      height: 230,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         color: Color(0xff1c2438),
@@ -621,20 +386,14 @@ class _Edit_screenState extends State<Edit_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Choose Background Color',
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
+              headofbgcolor(),
               InkWell(
                   onTap: () {
                     setState(() {
                       editindex = 0;
                     });
                   },
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
-                  ))
+                  child: icons())
             ],
           ),
           const SizedBox(
@@ -681,31 +440,7 @@ class _Edit_screenState extends State<Edit_screen> {
                           : null;
                     });
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
-                    child: Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            const BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 0.5,
-                              spreadRadius: 1,
-                            )
-                          ],
-                          color: (index == 0) ? color : null,
-                          gradient: (index > 0)
-                              ? LinearGradient(colors: colorgrid[index])
-                              : null),
-                      child: (index == 0)
-                          ? const Icon(
-                              Icons.add,
-                              size: 50,
-                            )
-                          : null,
-                    ),
-                  ),
+                  child: backcolors(index),
                 ),
               ),
             ),
@@ -714,10 +449,9 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container background() {
     return Container(
-      height: 220,
+      height: 230,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         color: Color(0xff1c2438),
@@ -732,20 +466,14 @@ class _Edit_screenState extends State<Edit_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Choose Background',
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
+               headofimage(),
               InkWell(
                   onTap: () {
                     setState(() {
                       editindex = 0;
                     });
                   },
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
-                  ))
+                  child: icons())
             ],
           ),
           const SizedBox(
@@ -763,26 +491,7 @@ class _Edit_screenState extends State<Edit_screen> {
                       backgroungindex = index;
                     });
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 18.0),
-                    child: Container(
-                        height: 100,
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 0.5,
-                              spreadRadius: 1,
-                            )
-                          ],
-                          color: Colors.black,
-                        ),
-                        child: Image.asset(
-                          festivalList[postviewIndex]['image'][index],
-                          fit: BoxFit.cover,
-                        )),
-                  ),
+                  child: backimage(index),
                 ),
               ),
             ),
@@ -791,10 +500,9 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container text() {
     return Container(
-      height: 220,
+      height: 230,
       decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -805,10 +513,7 @@ class _Edit_screenState extends State<Edit_screen> {
           const SizedBox(
             height: 15,
           ),
-          const Text(
-            'Edit Your Text Here!!',
-            style: TextStyle(color: Colors.white, fontSize: 15),
-          ),
+          headoftext(),
           const SizedBox(
             height: 20,
           ),
@@ -821,26 +526,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 8;
                   });
                 },
-                child: Container(
-                  width: 130,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xff1c2438),
-                  ),
-                  child: const Text(
-                    'Add Text',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
+                child: addtext(),
               ),
               InkWell(
                 onTap: () {
@@ -848,26 +534,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 7;
                   });
                 },
-                child: Container(
-                  width: 130,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xff1c2438),
-                  ),
-                  child: const Text(
-                    'Alignment',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
+                child: alignment(),
               ),
             ],
           ),
@@ -877,25 +544,13 @@ class _Edit_screenState extends State<Edit_screen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: 130,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 5,
-                      spreadRadius: 2,
-                    )
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  color: Color(0xff1c2438),
-                ),
-                child: const Text(
-                  'Font Family',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    editindex = 2;
+                  });
+                },
+                child: fontfamily(),
               ),
               InkWell(
                 onTap: () {
@@ -903,26 +558,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 9;
                   });
                 },
-                child: Container(
-                  width: 130,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xff1c2438),
-                  ),
-                  child: const Text(
-                    'Font Color',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ),
+                child: fontcolor(),
               ),
             ],
           ),
@@ -930,10 +566,9 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container canvas() {
     return Container(
-      height: 220,
+      height: 230,
       decoration: const BoxDecoration(
         color: Color(0xff1c2438),
         borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -944,11 +579,8 @@ class _Edit_screenState extends State<Edit_screen> {
           const SizedBox(
             height: 30,
           ),
-          const Text(
-            'Change Background Image And Color',
-            style: TextStyle(color: Colors.white),
-          ),
-          const SizedBox(
+          textname(),
+          SizedBox(
             height: 50,
           ),
           Row(
@@ -960,24 +592,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 4;
                   });
                 },
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xff1c2438),
-                  ),
-                  child: const Text(
-                    'Background',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
+                child: backgroundimg(),
               ),
               InkWell(
                 onTap: () {
@@ -985,24 +600,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 5;
                   });
                 },
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                      )
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Color(0xff1c2438),
-                  ),
-                  child: const Text(
-                    'BG Color',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
+                child: backgroundcol(),
               ),
             ],
           )
@@ -1010,16 +608,15 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-
   Container bottomnavigator() {
     return Container(
       height: 70,
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.white,
-            blurRadius: 5,
-            spreadRadius: 2,
+            color: Colors.grey,
+            blurRadius: 20,
+            spreadRadius: 0.5,
           )
         ],
         color: Color(0xff1c2438),
@@ -1033,19 +630,7 @@ class _Edit_screenState extends State<Edit_screen> {
                 editindex = 0;
               });
             },
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.draw,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Canvas',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
+            child: canvasedit(),
           ),
           InkWell(
             onTap: () {
@@ -1053,63 +638,10 @@ class _Edit_screenState extends State<Edit_screen> {
                 editindex = 1;
               });
             },
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.text_fields,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Text',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
+            child: textedit(),
           ),
-          InkWell(
-            onTap: ()  async {
-                RenderRepaintBoundary? boundray = imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-                              ui.Image image = await boundray.toImage();
-                              ByteData? bytedata = await image.toByteData(format: ui.ImageByteFormat.png);
-                              imgdata = bytedata!.buffer.asUint8List();
-                              ImageGallerySaver.saveImage(imgdata!,name: 'poster',quality: 100);
-            },
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.share,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Share',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
-          ),
-          InkWell(
-            onTap: () async {
-              final directory =await getApplicationDocumentsDirectory();
-                            File fileImage = await File('${directory.path}/img.png').create();
-                            fileImage.writeAsBytesSync(imgdata!);
-                            await ShareExtend.share(fileImage.path, 'festival');
-            },
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.save_alt,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Save',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
-          ),
+          save(),
+          share(),
         ],
       ),
     );
