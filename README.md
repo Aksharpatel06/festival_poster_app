@@ -1,3 +1,4 @@
+
 # festival_poster_app
 
 A new Flutter project.
@@ -33,3 +34,10 @@ samples, guidance on mobile development, and a full API reference.
 <img src ='https://github.com/Aksharpatel06/festival_poster_app/assets/143181114/e545602e-3549-44a7-a58d-fb99b6276a8e' width=150>
 <img src ='https://github.com/Aksharpatel06/festival_poster_app/assets/143181114/d5d053d5-fb7d-45ae-b15c-cd857983570f' width=150>
 <img src ='https://github.com/Aksharpatel06/festival_poster_app/assets/143181114/1c131d78-3e31-458d-9718-d446c37c46ac' width=150>
+
+
+
+https://github.com/Aksharpatel06/festival_poster_app/assets/143181114/81d2932a-c99a-4cb9-9e05-750feebe18b3.mp4
+
+
+
