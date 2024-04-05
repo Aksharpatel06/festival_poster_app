@@ -12,3 +12,4 @@ Color textcolor = Colors.black;
 Uint8List? imgdata;
 
 GlobalKey imgkey = GlobalKey();
+List history =[];

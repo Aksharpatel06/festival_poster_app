@@ -71,6 +71,11 @@ InkWell share() {
       File fileImage = await File('${directory.path}/img.png').create();
       fileImage.writeAsBytesSync(imgdata!);
       await ShareExtend.share(fileImage.path, 'festival');
+      Map finalImage = {
+        'Image':fileImage,
+        'festival':postviewIndex,
+      };
+      history.add(finalImage);
     },
     child: const Column(
       mainAxisAlignment: MainAxisAlignment.center,

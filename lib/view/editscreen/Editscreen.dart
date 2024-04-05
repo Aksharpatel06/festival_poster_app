@@ -41,6 +41,22 @@ class _Edit_screenState extends State<Edit_screen> {
           'Edit',
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          InkWell(onTap:() {
+            setState(() {
+              isImageandColor =true;
+              txtname = TextEditingController(text:'');
+              textcolorindex=0;
+              textfontfamilyindex =0;
+              top =0;
+               bottem =0;
+               left =0;
+               right =0;
+              backgroundcolorindex == 0;
+              backgroungindex =0;
+            });
+          },child: Icon(Icons.refresh,color: Colors.white,))
+        ],
       ),
       body: Column(
         children: [
@@ -521,7 +537,7 @@ class _Edit_screenState extends State<Edit_screen> {
                     editindex = 7;
                   });
                 },
-                child: alignment(),
+                child: alignments(),
               ),
             ],
           ),

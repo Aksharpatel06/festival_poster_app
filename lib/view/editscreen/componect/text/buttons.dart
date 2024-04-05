@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Container alignment() {
+Container alignments() {
   return Container(
     width: 130,
     alignment: Alignment.center,

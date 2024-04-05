@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../utils/festivallist.dart';
+import '../../utils/text.dart';
 
 class Poster_screen extends StatefulWidget {
   const Poster_screen({super.key});
@@ -49,8 +50,16 @@ class _Poster_screenState extends State<Poster_screen> {
                   onTap: () {
                     setState(() {
                       editindex = 6;
-                      backgroundcolorindex =0;
                       isImageandColor =true;
+                      txtname = TextEditingController(text:'');
+                      textcolorindex=0;
+                      textfontfamilyindex =0;
+                      top =0;
+                      bottem =0;
+                      left =0;
+                      right =0;
+                      backgroundcolorindex == 0;
+                      backgroungindex =0;
                     });
                     Navigator.of(context).pushNamed('/edit');
                   },

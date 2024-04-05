@@ -1,4 +1,5 @@
 import 'package:festival_poster_app/view/editscreen/Editscreen.dart';
+import 'package:festival_poster_app/view/historyscreen/store_screen.dart';
 import 'package:festival_poster_app/view/homescreen/homescreen.dart';
 import 'package:festival_poster_app/view/posterscreen/posterscreen.dart';
 import 'package:festival_poster_app/view/spleshscreen/spleshscreen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/home':(context) => Home_screen(),
         '/poster':(context) => Poster_screen(),
         '/edit':(context) => Edit_screen(),
+        '/history':(context) => History_screen(),
       },
     );
   }

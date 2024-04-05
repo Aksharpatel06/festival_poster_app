@@ -22,6 +22,7 @@ class _Home_screenState extends State<Home_screen> {
         preferredSize: const Size.fromHeight(65.0),
         child: AppBar(
           shadowColor: const Color(0xff1c2438),
+          automaticallyImplyLeading: true,
           centerTitle: true,
           title: Text(
             'Festy',
@@ -46,7 +47,20 @@ class _Home_screenState extends State<Home_screen> {
             ),
             const SizedBox(
               width: 15,
-            )
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  Navigator.of(context).pushNamed('/history');
+                });
+              },
+              child: Icon(Icons.save,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
           ],
         ),
       ),
