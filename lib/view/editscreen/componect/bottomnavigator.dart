@@ -4,7 +4,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 
@@ -15,15 +14,15 @@ InkWell save(int index) {
   return InkWell(
     onTap: () async {
       editindex = 6;
-      Fluttertoast.showToast(
-          msg: "Saving",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      // Fluttertoast.showToast(
+      //     msg: "Saving",
+      //     toastLength: Toast.LENGTH_LONG,
+      //     gravity: ToastGravity.TOP,
+      //     timeInSecForIosWeb: 2,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     fontSize: 16.0
+      // );
       RenderRepaintBoundary? boundray = imgkey.currentContext!
           .findRenderObject() as RenderRepaintBoundary;
       ui.Image image = await boundray.toImage();
@@ -32,7 +31,6 @@ InkWell save(int index) {
       imgdata = bytedata!.buffer.asUint8List();
       ImageGallerySaver.saveImage(imgdata!,
           name: 'poster', quality: 100);
-      index++;
       final directory = await getApplicationDocumentsDirectory();
       File fileImg = await File('${directory.path}/img(${index}).png').create();
       fileImg.writeAsBytesSync(imgdata!);

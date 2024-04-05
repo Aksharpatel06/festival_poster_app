@@ -74,7 +74,7 @@ class _Edit_screenState extends State<Edit_screen> {
           buildIndexedStack(),
         ],
       ),
-      bottomNavigationBar: bottomnavigator(count),
+      bottomNavigationBar: bottomnavigator(postviewIndex),
     );
   }
   IndexedStack buildIndexedStack() {

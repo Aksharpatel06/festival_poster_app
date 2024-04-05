@@ -40,7 +40,6 @@ dependencies:
   image_gallery_saver: ^2.0.3
   share_extend: any
   path_provider: any
-  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
