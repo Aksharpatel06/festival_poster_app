@@ -8,9 +8,6 @@ import '../../../utils/text.dart';
 Column image() {
   return Column(
     children: [
-      const SizedBox(
-        height: 20,
-      ),
       Container(
           height: 300,
           width: 300,

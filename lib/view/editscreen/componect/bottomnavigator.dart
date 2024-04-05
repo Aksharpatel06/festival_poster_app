@@ -4,25 +4,26 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 
 import '../../../utils/global_variable.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-InkWell save() {
+InkWell save(int index) {
   return InkWell(
     onTap: () async {
       editindex = 6;
-      // Fluttertoast.showToast(
-      //     msg: "Saving",
-      //     toastLength: Toast.LENGTH_LONG,
-      //     gravity: ToastGravity.TOP,
-      //     timeInSecForIosWeb: 2,
-      //     backgroundColor: Colors.red,
-      //     textColor: Colors.white,
-      //     fontSize: 16.0
-      // );
+      Fluttertoast.showToast(
+          msg: "Saving",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
       RenderRepaintBoundary? boundray = imgkey.currentContext!
           .findRenderObject() as RenderRepaintBoundary;
       ui.Image image = await boundray.toImage();
@@ -31,17 +32,14 @@ InkWell save() {
       imgdata = bytedata!.buffer.asUint8List();
       ImageGallerySaver.saveImage(imgdata!,
           name: 'poster', quality: 100);
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   duration: Duration(seconds: 1),
-      //   content: Text(
-      //     'save',
-      //     textAlign: TextAlign.center,
-      //     style: TextStyle(
-      //       fontSize: 16,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      // ));
+      index++;
+      final directory = await getApplicationDocumentsDirectory();
+      File fileImg = await File('${directory.path}/img(${index}).png').create();
+      fileImg.writeAsBytesSync(imgdata!);
+      history.add({
+        'Image':fileImg,
+        'festival':postviewIndex,
+      });
     },
     child: const Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,9 +66,10 @@ InkWell share() {
       await image.toByteData(format: ui.ImageByteFormat.png);
       imgdata = bytedata!.buffer.asUint8List();
       final directory = await getApplicationDocumentsDirectory();
-      File fileImage = await File('${directory.path}/img.png').create();
-      fileImage.writeAsBytesSync(imgdata!);
-      await ShareExtend.share(fileImage.path, 'festival');
+      fileImage = await File('${directory.path}/img.png').create();
+      fileImage!.writeAsBytesSync(imgdata!);
+      await ShareExtend.share(fileImage!.path, 'festival');
+      print('${fileImage!.path}-------------------------------------');
       Map finalImage = {
         'Image':fileImage,
         'festival':postviewIndex,

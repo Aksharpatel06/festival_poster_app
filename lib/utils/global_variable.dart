@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +12,7 @@ bool isImageandColor =true;
 Color color = Colors.white;
 Color textcolor = Colors.black;
 Uint8List? imgdata;
-
+File? fileImage;
 GlobalKey imgkey = GlobalKey();
 List history =[];
+int count=0;

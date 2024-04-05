@@ -74,7 +74,7 @@ class _Edit_screenState extends State<Edit_screen> {
           buildIndexedStack(),
         ],
       ),
-      bottomNavigationBar: bottomnavigator(),
+      bottomNavigationBar: bottomnavigator(count),
     );
   }
   IndexedStack buildIndexedStack() {
@@ -611,7 +611,7 @@ class _Edit_screenState extends State<Edit_screen> {
       ),
     );
   }
-  Container bottomnavigator() {
+  Container bottomnavigator(int index) {
     return Container(
       height: 70,
       decoration: const BoxDecoration(
@@ -643,7 +643,7 @@ class _Edit_screenState extends State<Edit_screen> {
             },
             child: textedit(),
           ),
-          save(),
+          save(index),
           share(),
         ],
       ),

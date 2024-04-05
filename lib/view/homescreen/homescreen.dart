@@ -51,7 +51,8 @@ class _Home_screenState extends State<Home_screen> {
             InkWell(
               onTap: () {
                 setState(() {
-                  Navigator.of(context).pushNamed('/history');
+                  Navigator.of(context).pushNamed('/history').then((value) => setState(() {
+                  }));
                 });
               },
               child: Icon(Icons.save,

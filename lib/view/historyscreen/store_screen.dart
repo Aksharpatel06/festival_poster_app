@@ -12,6 +12,14 @@ class History_screen extends StatefulWidget {
 }
 
 class _History_screenState extends State<History_screen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(history);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +46,7 @@ class _History_screenState extends State<History_screen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Container(
-                height: 120,
+               height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
